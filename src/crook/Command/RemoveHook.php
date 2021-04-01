@@ -34,7 +34,7 @@ class RemoveHook extends Command
      * @param OutputInterface $output
      * @return int|null|void
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $hookName = $input->getArgument('hook-name');
 
@@ -42,5 +42,7 @@ class RemoveHook extends Command
 
         $hook->removeLink($hookName);
         $hook->remove($hookName);
+
+        return 0;
     }
 }

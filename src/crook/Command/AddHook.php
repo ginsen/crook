@@ -2,6 +2,7 @@
 
 namespace Crook\Command;
 
+use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -40,9 +41,9 @@ class AddHook extends Command
      * @param InputInterface $input
      * @param OutputInterface $output
      * @return int|null|void
-     * @throws \Exception
+     * @throws Exception
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $hookName = $input->getArgument('hook-name');
         $hookAction = $input->getArgument('hook-action');
@@ -52,8 +53,10 @@ class AddHook extends Command
         try {
             $hook->add($hookName, $hookAction);
             $hook->createLink($hookName);
-        } catch (\Exception $e) {
-            throw new \Exception($e->getMessage() . "\n");
+
+            return 0;
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage() . "\n");
         }
     }
 }

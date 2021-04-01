@@ -28,7 +28,7 @@ class InitHook extends Command
      * @param OutputInterface $output
      * @return int|null|void
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $config = new Config;
         $hook = new Hook($config);
@@ -37,5 +37,7 @@ class InitHook extends Command
 
         $hook->copyTheHook();
         $hook->makeTheHookExecutable();
+
+        return 0;
     }
 }
